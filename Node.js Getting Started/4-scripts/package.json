@@ -1,0 +1,14 @@
+{
+  "name": "4-scripts",
+  "version": "1.0.0",
+  "description": "Esta una prueba de node js para pluralsight",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Leandro Ecalera  gmail: marcelo.escalera.inf@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
