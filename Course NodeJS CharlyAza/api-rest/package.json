@@ -1,0 +1,16 @@
+{
+    "name": "api-rest",
+    "version": "1.0.0",
+    "description": "Este un poryecto de aprendizaje con NodeJs de Carlos A.",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemoon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Leandro Escalera email: marcelo.escalera.inf@gmail.com",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1"
+    }
+}
