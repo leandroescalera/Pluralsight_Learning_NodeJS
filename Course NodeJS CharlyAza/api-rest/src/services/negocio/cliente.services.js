@@ -1,18 +1,18 @@
-module.exports = (services, modelos, Op) => {
+module.exports = (services, models, Op) => {
 
     const ClienteServicio = {};
 
     // metodos Repository
     ClienteServicio.listar = (params) => {
-        return modelos.Cliente.findAll(ClienteServicio.filtro(params));
+        return models.Cliente.findAll(ClienteServicio.filtro(params));
     };
 
     ClienteServicio.encontrarUno = (params) => {
-        return modelos.Cliente.findOne(ClienteServicio.filtro(params));
+        return models.Cliente.findOne(ClienteServicio.filtro(params));
     };
 
     ClienteServicio.construir = (params) => {
-        return modelos.Cliente.build(params);
+        return models.Cliente.build(params);
     };
 
     ClienteServicio.guardar = (Cliente, params) => {
@@ -35,23 +35,23 @@ module.exports = (services, modelos, Op) => {
         return ClienteServicio.guardar(ClienteServicio.construir(params), params);
     };
 
-    ClienteServicio.actualizar = (id, params) => {
-        return ClienteServicio.obtener(id)
+    ClienteServicio.actualizar = (id_cliente, params) => {
+        return ClienteServicio.obtener(id_cliente)
             .then((Cliente) => {
                 return ClienteServicio.guardar(Cliente, params);
             });
     };
 
-    ClienteServicio.obtener = (id) => {
-        return ClienteServicio.encontrarUno({ id })
+    ClienteServicio.obtener = (id_cliente) => {
+        return ClienteServicio.encontrarUno({ id_cliente })
             .then((Cliente) => {
-                if (!Cliente) throw new Error('No se ha encontrado');
+                if (!Cliente) throw new Error('No se ha encontrado al CLiente...');
                 return Cliente;
             });
     }
 
-    ClienteServicio.eliminar = (id) => {
-        return ClienteServicio.obtener(id)
+    ClienteServicio.eliminar = (id_cliente) => {
+        return ClienteServicio.obtener(id_cliente)
             .then(ClienteServicio.destruir);
     };
 

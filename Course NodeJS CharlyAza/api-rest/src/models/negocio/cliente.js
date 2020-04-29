@@ -58,5 +58,16 @@ module.exports = (sequelize, DataTypes) => {
 
     });
 
+    Cliente.asociar = (models) => {
+
+        models.Cliente.hasMany(models.Factura, {
+            as: 'factura',
+            foreignKey: 'idCliente',
+        });
+
+    };
+
+
+
     return Cliente;
 };

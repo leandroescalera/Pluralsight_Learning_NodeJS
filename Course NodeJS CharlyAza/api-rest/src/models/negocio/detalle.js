@@ -1,23 +1,29 @@
 module.exports = (sequelize, DataTypes) => {
-    const Factura = sequelize.define('Factura', {
+    const Detalle = sequelize.define('Detalle', {
 
-        num_factura: {
+        num_detalle: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
 
-        idCliente: {
+        idFactura: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            field: 'id_cliente'
+            field: 'id_factura'
 
         },
-        fecha: {
-            type: DataTypes.DATE,
+
+        idProducto: {
+            type: DataTypes.INTEGER,
             allowNull: false,
+            field: 'id_producto'
         },
+        cantidad: DataTypes.INTEGER,
+
+        precio: DataTypes.DOUBLE,
+
         fechaRegistro: {
             type: DataTypes.DATE,
             allowNull: false,
@@ -40,32 +46,10 @@ module.exports = (sequelize, DataTypes) => {
 
     }, {
         //schema:'oei',
-        tableName: 'factura',
+        tableName: 'Detalle',
         timestamp: false
 
     });
 
-
-    Factura.asociar = (models) => {
-
-        models.Factura.belongsTo(models.Cliente, {
-            as: 'cliente',
-            foreignKey: {
-                name: 'idCliente',
-                field: 'id_cliente',
-                allowNull: false
-            }
-        });
-
-        models.Factura.belongsToMany(models.Producto, {
-            as: 'producto',
-            through: models.Detalle,
-            foreignKey: 'idFactura',
-            otherKey: 'idProducto'
-        });
-
-    };
-
-
-    return Factura;
+    return Detalle;
 };

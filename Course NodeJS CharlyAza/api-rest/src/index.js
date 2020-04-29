@@ -32,19 +32,13 @@ const db = new Sequelize('bd_facturacion', 'chelomon', '123456', {
 const models = {};
 //negocio
 models['Cliente'] = db.import('./models/negocio/cliente.js');
+models['Factura'] = db.import('./models/negocio/factura.js');
+models['Producto'] = db.import('./models/negocio/producto.js');
+models['Detalle'] = db.import('./models/negocio/detalle.js');
 //seguridad
 
 
-// RELACIONES
-//||||||||||||||||||||||||||||||||||||||||||||||||||
-//--------------------------------------------------
-Object.keys(models).forEach((nombre) => {
-    if (models[nombre].asociar) {
-        models[nombre].asociar(models);
-    }
-});
-//--------------------------------------------------
-//||||||||||||||||||||||||||||||||||||||||||||||||||
+
 
 
 //--------------------------------------------------
@@ -53,6 +47,9 @@ Object.keys(models).forEach((nombre) => {
 //NEGOCIO
 const services = {};
 services['Cliente'] = require('./services/negocio/cliente.services')(services, models, Sequelize.Op);
+services['Factura'] = require('./services/negocio/factura.services')(services, models, Sequelize.Op);
+services['Producto'] = require('./services/negocio/producto.services.js')(services, models, Sequelize.Op);
+services['Detalle'] = require('./services/negocio/detalle.services.js')(services, models, Sequelize.Op);
 //SEGURIDAD 
 
 
@@ -62,6 +59,9 @@ services['Cliente'] = require('./services/negocio/cliente.services')(services, m
 //--------------------------------------------------
 //NEGOCIO
 require('./controllers/negocio/cliente.controllers')(router, services);
+require('./controllers/negocio/factura.controllers')(router, services);
+require('./controllers/negocio/producto.controllers')(router, services);
+require('./controllers/negocio/detalle.controllers')(router, services);
 //SEGURIDAD
 
 
@@ -77,6 +77,17 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
     return res.status(400).json({});
 });
+
+// RELACIONES
+//||||||||||||||||||||||||||||||||||||||||||||||||||
+//--------------------------------------------------
+Object.keys(models).forEach((nombre) => {
+    if (models[nombre].asociar) {
+        models[nombre].asociar(models);
+    }
+});
+//--------------------------------------------------
+//||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
 //INICIALIZACION DE LA APLICACION
