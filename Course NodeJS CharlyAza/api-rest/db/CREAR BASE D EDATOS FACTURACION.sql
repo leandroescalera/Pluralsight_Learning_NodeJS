@@ -1,7 +1,7 @@
 CREATE DATABASE BD_FACTURACION;
 USE BD_FACTURACION;
 
---Tabla Cliente
+-- Tabla Cliente
 CREATE TABLE IF NOT EXISTS CLIENTE(
 id_cliente int(11) NOT NULL AUTO_INCREMENT COMMENT 'Clave primaria',
 nombre varchar(50) NOT NULL COMMENT 'Nombre del cliente',
@@ -18,7 +18,7 @@ activo tinyint(1) NOT NULL COMMENT 'Tendra el campo activo o inactivo para cuand
 PRIMARY KEY (id_cliente)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tabla de CLIENTE' ;
 
---Creacion de la tbala FACTURA
+-- Creacion de la tbala FACTURA
 CREATE TABLE IF NOT EXISTS FACTURA(
 num_factura int(11) NOT NULL AUTO_INCREMENT COMMENT 'Clave primaria de la FACTURA',
 id_cliente int(11) NOT NULL COMMENT 'Clave primaria de CLIENTE',
@@ -33,7 +33,7 @@ INDEX(id_cliente),
 FOREIGN KEY (id_cliente) REFERENCES CLIENTE(id_cliente)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tabla FACTURA' ;
 
---Creacion de la tbala PRODUCTO
+-- Creacion de la tbala PRODUCTO
 CREATE TABLE IF NOT EXISTS PRODUCTO(
 id_producto int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla PRODUCTO',
 nombre varchar(50) NOT NULL COMMENT 'Nombre del PRODUCTO',
@@ -47,7 +47,7 @@ activo tinyint(1) NOT NULL COMMENT 'Tendra el campo activo o inactivo de borrado
 PRIMARY KEY (id_producto)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tabla PRODUCTO' ;
 
---Creacion de la tabla DETALLE
+-- Creacion de la tabla DETALLE
 CREATE TABLE IF NOT EXISTS DETALLE(
 num_detalle int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle', 
 id_factura int(11) NOT NULL COMMENT 'Llave foranea de la tabla FACTURA',
@@ -65,6 +65,167 @@ INDEX(id_producto),
 FOREIGN KEY (id_factura) REFERENCES FACTURA(num_factura),
 FOREIGN KEY (id_producto) REFERENCES PRODUCTO(id_producto)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tabla DETALLE' ;
+
+
+-- _________________________________________________________________________________________________________________________________
+-- SEGURIDAD DEL SISTEMA
+
+-- PERSONA
+CREATE TABLE `seg_persona` (
+  `id_persona` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle',
+  `primer_apellido` varchar(30) NOT NULL,
+  `segundo_apellido` varchar(30) NOT NULL,
+  `nombres` varchar(50) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_registro` varchar(100) NOT NULL,
+  `fecha_modificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(100) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_persona)
+) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+-- USUARIO
+
+CREATE TABLE `seg_usuario` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle',
+  `id_persona` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(300) NOT NULL,
+  `estado` varchar(20) NOT NULL,
+  `fecha_ultimo_acceso` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_registro` varchar(100) NOT NULL,
+  `fecha_modificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(100) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_usuario),
+  INDEX(id_persona),
+  FOREIGN KEY (id_persona) REFERENCES seg_persona(id_persona)
+) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+-- USUARIO -  ROL 
+
+CREATE TABLE `seg_usuario_rol` (
+  `id_usuario_rol` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle',
+  `id_usuario` int(11) NOT NULL,
+  `id_rol` int(11) NOT NULL,
+  `fecha_inicio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_fin` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_registro` varchar(50) NOT NULL,
+  `fecha_modificacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(50) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_usuario_rol),
+  INDEX(id_usuario),
+  INDEX(id_rol),
+  FOREIGN KEY (id_usuario) REFERENCES seg_usuario(id_usuario),
+  FOREIGN KEY (id_rol) REFERENCES seg_rol(id_rol)
+) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+-- ROL
+
+CREATE TABLE `seg_rol` (
+  `id_rol` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle',
+  `id_aplicacion` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_registro` varchar(50) NOT NULL,
+  `fecha_modificacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(50) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_rol),
+  index(id_aplicacion),
+  FOREIGN KEY (id_aplicacion) REFERENCES seg_aplicacion(id_aplicacion)
+) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+-- ROL - RECURSO
+
+CREATE TABLE `seg_rol_recurso` (
+  `id_rol_recurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle',
+  `id_rol` int(11) NOT NULL,
+  `id_recurso` int(11) NOT NULL,
+  `lectura` tinyint(1) NOT NULL,
+  `creacion` tinyint(1) NOT NULL,
+  `modificacion` tinyint(1) NOT NULL,
+  `eliminacion` tinyint(1) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_registro` varchar(100) NOT NULL,
+  `fecha_modificacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(100) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_rol_recurso),
+  index(id_rol),
+  index(id_recurso),
+  FOREIGN KEY (id_rol) REFERENCES seg_rol(id_rol),
+  FOREIGN KEY (id_recurso) REFERENCES seg_recurso(id_recurso)
+  ) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+-- APLICACION
+
+CREATE TABLE `seg_aplicacion` (
+  `id_aplicacion` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_corto` varchar(20) NOT NULL,
+  `nombre_completo` varchar(200) NOT NULL,
+  `alias` varchar(50) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_creacion` varchar(100) NOT NULL,
+  `fecha_modificacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(100) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_aplicacion)
+) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+-- MODULOS
+
+CREATE TABLE `seg_modulo` (
+  `id_modulo` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle',
+  `id_aplicacion` int(11) NOT NULL,
+  `posicion` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_registro` varchar(100) NOT NULL,
+  `fecha_modificacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(100) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_modulo),
+  index(id_aplicacion),
+  FOREIGN KEY (id_aplicacion) REFERENCES seg_aplicacion(id_aplicacion)
+  
+) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+-- RECURSO
+
+CREATE TABLE `seg_recurso` (
+  `id_recurso` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID de la tabla detalle',
+  `id_modulo` int(11) NOT NULL,
+  `es_menu` tinyint(1) NOT NULL,
+  `posicion` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_registro` varchar(100) NOT NULL,
+  `fecha_modificacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `usuario_modificacion` varchar(100) DEFAULT NULL,
+  `activo` tinyint(1) NOT NULL,
+  PRIMARY KEY (id_recurso),
+  index(id_modulo),
+  FOREIGN KEY (id_modulo) REFERENCES seg_modulo(id_modulo)
+  ) ENGINE= InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
 
 
 

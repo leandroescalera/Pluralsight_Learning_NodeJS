@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const app = express();
 const router = express.Router();
-const port = process.env.PORT || 3000;
+const config = require('./config');
 
 
 //middlewares
@@ -44,13 +44,13 @@ models['Detalle'] = db.import('./models/negocio/detalle.js');
 //--------------------------------------------------
 // Definición de servicios
 //--------------------------------------------------
-//NEGOCIO
 const services = {};
+//NEGOCIO
 services['Cliente'] = require('./services/negocio/cliente.services')(services, models, Sequelize.Op);
 services['Factura'] = require('./services/negocio/factura.services')(services, models, Sequelize.Op);
 services['Producto'] = require('./services/negocio/producto.services.js')(services, models, Sequelize.Op);
 services['Detalle'] = require('./services/negocio/detalle.services.js')(services, models, Sequelize.Op);
-//SEGURIDAD 
+//SEGURIDAD
 
 
 
@@ -91,6 +91,6 @@ Object.keys(models).forEach((nombre) => {
 
 
 //INICIALIZACION DE LA APLICACION
-app.listen(port, () => {
-    console.log(`API REST corriendo en el puerto https://localhost:${port}`);
+app.listen(config.port, () => {
+    console.log(`API REST corriendo en el puerto https://localhost:${config.port}`);
 })
