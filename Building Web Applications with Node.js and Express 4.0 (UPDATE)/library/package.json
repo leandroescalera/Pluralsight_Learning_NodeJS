@@ -1,15 +1,20 @@
 {
-  "name": "library",
-  "version": "1.0.0",
-  "description": "Este el primer modulo de pluralsight",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Leandro Alconini email: marcelo.escalera.inf@gmail.com",
-  "license": "MIT",
-  "dependencies": {
-    "chalk": "^4.0.0",
-    "express": "^4.17.1"
-  }
+    "name": "library",
+    "version": "1.0.0",
+    "description": "Este el primer modulo de pluralsight",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Leandro Alconini email: marcelo.escalera.inf@gmail.com",
+    "license": "MIT",
+    "dependencies": {
+        "bootstrap": "^4.4.1",
+        "chalk": "^4.0.0",
+        "debug": "^4.1.1",
+        "express": "^4.17.1",
+        "jquery": "^3.5.0",
+        "morgan": "^1.10.0"
+    }
 }
