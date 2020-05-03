@@ -4,8 +4,9 @@
     "description": "Este el primer modulo de pluralsight",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon app.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "set DEBUG=app & nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint app.js"
     },
     "author": "Leandro Alconini email: marcelo.escalera.inf@gmail.com",
     "license": "MIT",
@@ -15,6 +16,14 @@
         "debug": "^4.1.1",
         "express": "^4.17.1",
         "jquery": "^3.5.0",
-        "morgan": "^1.10.0"
+        "morgan": "^1.10.0",
+        "pug": "^2.0.4"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.30.0",
+        "@typescript-eslint/parser": "^2.30.0",
+        "eslint": "^6.8.0",
+        "eslint-config-airbnb-base": "^14.1.0",
+        "eslint-plugin-import": "^2.20.2"
     }
 }
