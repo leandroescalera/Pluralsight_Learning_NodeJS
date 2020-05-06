@@ -1,3 +1,5 @@
+'use strict'
+
 let express = require('express');
 let chalk = require('chalk');
 let debug = require('debug')('app');
@@ -5,8 +7,8 @@ let morgan = require('morgan');
 //let path = require('path');
 let path = require('path');
 
-const config = require('./config');
 
+const config = require('./config');
 
 let app = express();
 
@@ -20,10 +22,23 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist'))
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
+
+const nav = [{ link: '/books', title: 'Book' },
+    { link: '/authors', title: 'Author' }
+];
+
+const bookRouter = require('./src/routes/bookRoutes')(nav);
+app.use('/books', bookRouter);
+
 app.get('/', (req, res) => {
     //res.send('Hello from my library app');
     // res.sendFile(path.join(__dirname, '/views/', '/index.html'));
-    res.render('index', { list: ['a', 'b'], title: 'Library' });
+    res.render('index', {
+        nav: [{ link: '/books', title: 'Book' },
+            { link: '/authors', title: 'Author' }
+        ],
+        title: 'Library'
+    });
 });
 
 app.listen(config.port, () => {
