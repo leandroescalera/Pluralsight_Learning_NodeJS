@@ -10,6 +10,7 @@
     "author": "Leandro Escalera email: marcelo.escalera.inf@gmail.com",
     "license": "MIT",
     "dependencies": {
+        "admin-lte-express": "^1.4.2",
         "body-parser": "^1.19.0",
         "express": "^4.17.1",
         "morgan": "^1.10.0",

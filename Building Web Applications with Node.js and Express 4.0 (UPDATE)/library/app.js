@@ -6,13 +6,32 @@ let debug = require('debug')('app');
 let morgan = require('morgan');
 //let path = require('path');
 let path = require('path');
+const configGeneral = require('./config');
+const sql = require('mssql');
 
+const config = {
+    user: 'library',
+    password: '8353086ASlom',
+    server: 'pslibrary8353086.database.windows.net', // You can use 'localhost\\instance' to connect to named instance
+    database: 'PSLibrary',
+    options: {
+        encrypt: true,
+        enableArithAbort: true
+    }
 
-const config = require('./config');
+}
 
 let app = express();
 
+sql.connect(config).catch(err => debug(err));
+
 app.use(morgan('dev'));
+
+app.use((req, res, next) => {
+    debug('My Middleware');
+    next();
+});
+
 app.use(express.static(path.join(__dirname, '/public/')));
 
 
@@ -41,8 +60,8 @@ app.get('/', (req, res) => {
     });
 });
 
-app.listen(config.port, () => {
-    debug(chalk.blue("Listenning on PORT") + "  >>>>  " + chalk.green(`http://localhost:${config.port}`));
+app.listen(configGeneral.port, () => {
+    debug(chalk.blue("Listenning on PORT") + "  >>>>  " + chalk.green(`http://localhost:${configGeneral.port}`));
     //console.log(chalk.blue("Listenning on PORT 3000") + "  >>>>  " + chalk.green(`http://localhost:${3000}`));
 
 })
