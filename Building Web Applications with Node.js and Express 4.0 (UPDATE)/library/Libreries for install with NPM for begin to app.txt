@@ -1,4 +1,5 @@
 npm init
+npm install -g nodemon  // si no tiene instalado nodemon local o globalmente
 npm install express --save
 npm install morgan
 npm install debug
