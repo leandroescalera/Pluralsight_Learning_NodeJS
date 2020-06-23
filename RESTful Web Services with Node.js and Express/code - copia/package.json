@@ -1,0 +1,24 @@
+{
+    "name": "code",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "set DEBUG=app,app:* & nodemon app.js",
+        "lint": "eslint",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Leandro Alconini",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "debug": "^4.1.1",
+        "express": "^4.17.1",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "eslint": "^7.3.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.21.2"
+    }
+}
