@@ -10,7 +10,7 @@ if (process.env.ENV === 'Test') {
     let db = mongoose.connect("mongodb://localhost/bookAPI_Test");
 } else {
     debug('This is for real');
-    let db = mongoose.connect("mongodb://localhost/bookAPI_Prod");
+    let db = mongoose.connect("mongodb://localhost/bookAPI");
 }
 
 

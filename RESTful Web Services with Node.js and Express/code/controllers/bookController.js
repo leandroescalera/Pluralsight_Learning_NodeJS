@@ -1,3 +1,7 @@
+const {
+    map
+} = require("../app");
+
 let debug = require("debug")("app:bookController.js");
 
 function booksController(Book) {
@@ -25,7 +29,13 @@ function booksController(Book) {
             if (err) {
                 return res.send(err);
             }
-            return res.json(books);
+            const returnBooks = books.map((book) => {
+                let newBook = book.toJSON();
+                newBook.links = {};
+                newBook.links.self = `http://${req.headers.host}/api/books/${book._id}`;
+                return newBook;
+            });
+            return res.json(returnBooks);
         });
     }
 
