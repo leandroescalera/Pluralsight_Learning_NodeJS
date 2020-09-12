@@ -4,7 +4,7 @@
     "description": "Este un poryecto de aprendizaje con NodeJs de Carlos A.",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon src/index.js",
+        "start": "nodemon src/app.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Leandro Escalera email: marcelo.escalera.inf@gmail.com",

@@ -1,0 +1,5 @@
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessEntityLayer\bin\Debug\BusinessEntityLayer.dll
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessEntityLayer\bin\Debug\BusinessEntityLayer.pdb
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessEntityLayer\obj\Debug\BusinessEntityLayer.csproj.CoreCompileInputs.cache
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessEntityLayer\obj\Debug\BusinessEntityLayer.dll
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessEntityLayer\obj\Debug\BusinessEntityLayer.pdb

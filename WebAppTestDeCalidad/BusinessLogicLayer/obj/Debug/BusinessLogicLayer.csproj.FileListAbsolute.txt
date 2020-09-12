@@ -1,0 +1,11 @@
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.dll
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\bin\Debug\BusinessLogicLayer.pdb
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\bin\Debug\BusinessEntityLayer.dll
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\bin\Debug\BusinessEntityLayer.pdb
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csprojAssemblyReference.cache
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.csproj.CopyComplete
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.dll
+C:\Users\Leandro Escalera\Source\Repos\WebAppTestDeCalidad\BusinessLogicLayer\obj\Debug\BusinessLogicLayer.pdb
